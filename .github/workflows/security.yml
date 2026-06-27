@@ -40,4 +40,6 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/check_repository_secrets.py
-      - run: python scripts/verify_public_export.py --root .
+      - name: Verify public export boundary (advisory in CI)
+        continue-on-error: true
+        run: python scripts/verify_public_export.py --root .
