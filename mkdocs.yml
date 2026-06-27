@@ -5,6 +5,7 @@ theme:
 nav:
   - Home: index.md
   - Quickstart: QUICKSTART.md
+  - Safe Demo: DEMO.md
   - Architecture: ARCHITECTURE.md
   - Security Model: SECURITY_MODEL.md
   - Privacy: PRIVACY.md

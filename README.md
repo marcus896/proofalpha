@@ -1,14 +1,43 @@
 <p align="center">
-  <img src="assets/brand/proofalpha-wordmark.svg" alt="ProofAlpha — Evidence before execution" width="840">
+  <img src="assets/brand/proofalpha-hero.svg" alt="ProofAlpha — evidence gate for crypto strategies" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://github.com/marcus896/proofalpha/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/marcus896/proofalpha/actions/workflows/tests.yml/badge.svg"></a>
+  <a href="https://github.com/marcus896/proofalpha/actions/workflows/docs.yml"><img alt="Docs" src="https://github.com/marcus896/proofalpha/actions/workflows/docs.yml/badge.svg"></a>
+  <a href="https://github.com/marcus896/proofalpha/actions/workflows/security.yml"><img alt="Security" src="https://github.com/marcus896/proofalpha/actions/workflows/security.yml/badge.svg"></a>
+  <img alt="Python 3.12 and 3.13" src="https://img.shields.io/badge/python-3.12%20%7C%203.13-blue">
+  <img alt="Apache 2.0 license" src="https://img.shields.io/badge/license-Apache--2.0-green">
+  <img alt="Paper no-key default" src="https://img.shields.io/badge/default-paper%2Fno--key-brightgreen">
+  <img alt="1138 tests passing" src="https://img.shields.io/badge/tests-1138%20passing-brightgreen">
 </p>
 
 # ProofAlpha
 
 <!-- Legacy release-doctor compatibility strings: # Crypto Perps Stress Research Engine; python -m engine.app.cli run; python -m engine.app.cli doctor -->
 
-**Evidence-first autonomous crypto strategy research, validation, paper trading, and risk-gated execution.**
+**Stop promoting backtest luck.**
 
-ProofAlpha is a local-first Python system for turning strategy ideas into reproducible experiments, robustness evidence, paper sessions, and auditable decisions. It is built for developers, quants, and maintainers who want evidence before any execution authority.
+ProofAlpha turns crypto strategy ideas into reproducible evidence: backtests, stress tests, paper/no-key runs, run cards, dashboards, and explicit block/promote decisions before money can move.
+
+```bash
+python -m pip install -e .
+proofalpha run --config examples/minimal_builtin_study.json --output-dir outputs/example-run
+```
+
+Expected output:
+
+```text
+status: blocked
+reason: weak evidence found
+artifacts: dashboard.json + runcard.json + events.jsonl
+```
+
+A blocked strategy is a successful safety gate.
+
+<p align="center">
+  <img src="assets/screenshots/runcard-blocked.svg" alt="ProofAlpha blocked run card preview" width="88%">
+</p>
 
 > **Paper/no-key first.** Public examples require no exchange credentials and submit no live orders. Historical, simulated, and paper results do not guarantee future returns.
 
@@ -20,7 +49,7 @@ Most trading bots make it too easy to jump from an idea to execution. ProofAlpha
 idea -> validated study -> stress tests -> paper evidence -> auditable decision -> gated execution readiness
 ```
 
-A failed or blocked strategy is a useful result. It means the system found weak evidence, insufficient data, excessive turnover, capacity risk, regime fragility, or another reason not to promote the candidate.
+It is built for developers, quants, and maintainers who want evidence before any execution authority. A failed or blocked strategy is useful: it can reveal weak evidence, insufficient data, excessive turnover, capacity risk, regime fragility, or another reason not to promote the candidate.
 
 ## 60-second safe demo
 
@@ -54,6 +83,16 @@ outputs/example-run/example-study.dashboard.json
 ```
 
 A demo may end as `blocked`; that is expected for weak evidence and shows the safety gates working.
+
+## What ProofAlpha outputs
+
+| Artifact | What it gives you |
+| --- | --- |
+| Event log | A line-by-line execution trail for auditability. |
+| Run card | The human-readable block/promote decision and reasons. |
+| Dashboard JSON | Structured metrics, validation results, and evidence payloads. |
+| Research memory | Local history for bounded follow-up research and duplicate detection. |
+| Evidence cards | Strategy evidence summaries for review before promotion. |
 
 ## What it includes
 
@@ -128,6 +167,7 @@ Read [`SECURITY.md`](SECURITY.md), [`DISCLAIMER.md`](DISCLAIMER.md), and [`docs/
 Start here:
 
 - [`docs/QUICKSTART.md`](docs/QUICKSTART.md) - first run, outputs, and troubleshooting.
+- [`docs/DEMO.md`](docs/DEMO.md) - safe demo walkthrough and expected blocked result.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) - system design and major components.
 - [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) - trust boundaries and execution safety.
 - [`docs/OPEN_SOURCE_BOUNDARY.md`](docs/OPEN_SOURCE_BOUNDARY.md) - what belongs in the public repo.
@@ -171,7 +211,9 @@ Original vector assets:
 ```text
 assets/brand/proofalpha-mark.svg
 assets/brand/proofalpha-wordmark.svg
+assets/brand/proofalpha-hero.svg
 assets/brand/github-social-preview.svg
+assets/screenshots/runcard-blocked.svg
 ```
 
 ## Contributing

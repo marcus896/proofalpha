@@ -2,9 +2,13 @@
 
 ProofAlpha is an evidence-first framework for reproducible crypto strategy research, robustness validation, paper execution, and auditable decisions.
 
-## Guides
+## Start here
 
 - [Quickstart](QUICKSTART.md)
+- [Safe demo](DEMO.md)
+
+## Guides
+
 - [Architecture](ARCHITECTURE.md)
 - [Security model](SECURITY_MODEL.md)
 - [Privacy](PRIVACY.md)
@@ -21,4 +25,4 @@ ProofAlpha is an evidence-first framework for reproducible crypto strategy resea
 - no guaranteed-return or passive-income claims;
 - no silent risk-policy changes from model or agent output.
 
-For installation and verified examples, start with the repository `README.md` or the [quickstart](QUICKSTART.md).
+For installation and verified examples, start with the repository `README.md`, the [quickstart](QUICKSTART.md), or the [safe demo](DEMO.md).

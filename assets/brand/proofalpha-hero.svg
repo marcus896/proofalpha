@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+  <title id="title">ProofAlpha evidence gate for crypto strategies</title>
+  <desc id="desc">A dark GitHub hero image showing a terminal command, an evidence pipeline, and a blocked strategy run card.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#090D12"/>
+      <stop offset="0.55" stop-color="#10161F"/>
+      <stop offset="1" stop-color="#07120D"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#B7FF4A"/>
+      <stop offset="1" stop-color="#1EE8A5"/>
+    </linearGradient>
+    <linearGradient id="danger" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#FF6B6B"/>
+      <stop offset="1" stop-color="#FFB86B"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.72 0 0 0 0 1 0 0 0 0 0.29 0 0 0 0.5 0"/>
+      <feBlend in="SourceGraphic"/>
+    </filter>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .sans { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; }
+      .muted { fill: #9AA7B2; }
+      .white { fill: #F4F1E8; }
+      .panel { fill: #10161D; stroke: #263340; stroke-width: 2; }
+      .chip { fill: #151E27; stroke: #2B3947; stroke-width: 1.4; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="760" rx="42" fill="url(#bg)"/>
+  <circle cx="1320" cy="120" r="250" fill="#12351E" opacity="0.28" filter="url(#softGlow)"/>
+  <circle cx="230" cy="680" r="260" fill="#1A2A3B" opacity="0.42"/>
+
+  <g transform="translate(80 70)">
+    <rect x="0" y="0" width="108" height="108" rx="24" fill="#111315" stroke="#2A3828" stroke-width="2"/>
+    <g transform="translate(21 20) scale(.13)">
+      <path d="M133 356 232 126h58l96 230h-66l-21-57H215l-22 57h-60Zm104-113h43l-21-63-22 63Z" fill="#F4F1E8"/>
+      <path d="m105 276 57 57 129-154" fill="none" stroke="#B7FF4A" stroke-width="38" stroke-linecap="square" stroke-linejoin="miter"/>
+      <path d="M307 302h91" stroke="#B7FF4A" stroke-width="38" stroke-linecap="square"/>
+    </g>
+    <text x="134" y="47" class="sans white" font-size="46" font-weight="780" letter-spacing="-1.8">Proof<tspan fill="#B7FF4A">Alpha</tspan></text>
+    <text x="137" y="88" class="sans" font-size="22" font-weight="650" fill="#AAB5BE" letter-spacing="2.5">EVIDENCE GATE FOR CRYPTO STRATEGIES</text>
+  </g>
+
+  <text x="80" y="238" class="sans white" font-size="60" font-weight="820" letter-spacing="-2.6">Stop promoting backtest luck.</text>
+  <text x="82" y="294" class="sans" font-size="28" font-weight="520" fill="#B8C4CE">Backtest, stress test, paper test — then block or promote with evidence.</text>
+
+  <g transform="translate(82 360)">
+    <rect class="panel" x="0" y="0" width="510" height="218" rx="24"/>
+    <rect x="0" y="0" width="510" height="46" rx="24" fill="#0C1117"/>
+    <circle cx="28" cy="23" r="7" fill="#FF6B6B"/>
+    <circle cx="52" cy="23" r="7" fill="#FFD166"/>
+    <circle cx="76" cy="23" r="7" fill="#1EE8A5"/>
+    <text x="26" y="88" class="mono" font-size="23" fill="#7DD3FC">$</text>
+    <text x="58" y="88" class="mono white" font-size="23">proofalpha run \</text>
+    <text x="58" y="124" class="mono muted" font-size="22">--config examples/minimal_builtin_study.json \</text>
+    <text x="58" y="160" class="mono muted" font-size="22">--output-dir outputs/example-run</text>
+    <text x="26" y="197" class="mono" font-size="20" fill="#B7FF4A">writes dashboard + runcard + event log</text>
+  </g>
+
+  <g transform="translate(637 388)">
+    <g>
+      <rect class="chip" x="0" y="0" width="132" height="58" rx="18"/>
+      <text x="66" y="37" class="sans white" text-anchor="middle" font-size="20" font-weight="760">IDEA</text>
+    </g>
+    <path d="M144 29h48" stroke="url(#signal)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M186 19l16 10-16 10" fill="none" stroke="#B7FF4A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(210)">
+      <rect class="chip" x="0" y="0" width="150" height="58" rx="18"/>
+      <text x="75" y="37" class="sans white" text-anchor="middle" font-size="20" font-weight="760">VALIDATE</text>
+    </g>
+    <path d="M372 29h48" stroke="url(#signal)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M414 19l16 10-16 10" fill="none" stroke="#B7FF4A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(438)">
+      <rect class="chip" x="0" y="0" width="132" height="58" rx="18"/>
+      <text x="66" y="37" class="sans white" text-anchor="middle" font-size="20" font-weight="760">STRESS</text>
+    </g>
+    <path d="M582 29h48" stroke="url(#signal)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M624 19l16 10-16 10" fill="none" stroke="#B7FF4A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(648)">
+      <rect class="chip" x="0" y="0" width="132" height="58" rx="18"/>
+      <text x="66" y="37" class="sans white" text-anchor="middle" font-size="20" font-weight="760">PAPER</text>
+    </g>
+    <path d="M390 84v86" stroke="#334250" stroke-width="3" stroke-dasharray="8 8"/>
+    <text x="390" y="206" class="sans" font-size="26" font-weight="760" text-anchor="middle" fill="#B7FF4A">evidence before execution</text>
+  </g>
+
+  <g transform="translate(1070 318)">
+    <rect x="0" y="0" width="430" height="330" rx="26" fill="#121922" stroke="#2D3A47" stroke-width="2"/>
+    <text x="34" y="55" class="sans white" font-size="30" font-weight="800">RunCard</text>
+    <rect x="278" y="27" width="118" height="42" rx="14" fill="#2A1518" stroke="#FF6B6B" stroke-width="2"/>
+    <text x="337" y="55" class="sans" font-size="19" text-anchor="middle" font-weight="780" fill="#FF8A8A">BLOCKED</text>
+
+    <text x="34" y="104" class="mono muted" font-size="19">decision</text>
+    <text x="168" y="104" class="mono" font-size="19" fill="#FFB86B">do_not_promote</text>
+
+    <text x="34" y="150" class="sans" font-size="22" font-weight="760" fill="#F4F1E8">Why it stopped</text>
+    <g transform="translate(34 176)">
+      <circle cx="10" cy="10" r="6" fill="#FF6B6B"/>
+      <text x="28" y="17" class="mono" font-size="18" fill="#C9D3DC">capacity_5x</text>
+      <circle cx="10" cy="50" r="6" fill="#FFB86B"/>
+      <text x="28" y="57" class="mono" font-size="18" fill="#C9D3DC">turnover_budget</text>
+      <circle cx="10" cy="90" r="6" fill="#FFD166"/>
+      <text x="28" y="97" class="mono" font-size="18" fill="#C9D3DC">min_oos_trades</text>
+      <circle cx="10" cy="130" r="6" fill="#7DD3FC"/>
+      <text x="28" y="137" class="mono" font-size="18" fill="#C9D3DC">scenario_pass_matrix</text>
+    </g>
+    <rect x="34" y="284" width="362" height="2" fill="#2D3A47"/>
+    <text x="34" y="313" class="sans" font-size="18" fill="#B7FF4A" font-weight="700">A blocked strategy is a successful safety gate.</text>
+  </g>
+</svg>

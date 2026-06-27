@@ -11,7 +11,8 @@ All notable changes to ProofAlpha are documented here.
 - Public export manifest with source file hash verification.
 - Repository verification, package, documentation, and release workflows.
 - Docker and Dev Container support.
-- Public quickstart and release-checklist documentation for safe launch readiness.
+- Public quickstart, safe demo, and release-checklist documentation for safe launch readiness.
+- GitHub-first hero artwork and blocked-runcard preview for clearer first-run onboarding.
 
 ### Changed
 
@@ -19,7 +20,7 @@ All notable changes to ProofAlpha are documented here.
 - Internal package name remains `engine` to preserve tested imports.
 - DuckDB is declared as a core dependency for snapshot storage.
 - Public examples and quickstarts use paper and no-key workflows.
-- README now makes blocked demo outcomes explicit as successful safety-gate behavior.
+- README now leads with the evidence-gate positioning and makes blocked demo outcomes explicit as successful safety-gate behavior.
 
 ### Release checks
 

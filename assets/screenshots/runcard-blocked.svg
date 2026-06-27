@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" role="img" aria-labelledby="title desc">
+  <title id="title">ProofAlpha blocked run card preview</title>
+  <desc id="desc">A sample ProofAlpha run card showing a blocked strategy with explicit validation reasons.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#080C12"/>
+      <stop offset="1" stop-color="#111A22"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" x2="1">
+      <stop offset="0" stop-color="#B7FF4A"/>
+      <stop offset="1" stop-color="#1EE8A5"/>
+    </linearGradient>
+    <style>
+      .sans { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .white { fill:#F4F1E8; }
+      .muted { fill:#9AA7B2; }
+      .panel { fill:#121922; stroke:#2C3946; stroke-width:2; }
+    </style>
+  </defs>
+  <rect width="1100" height="620" rx="34" fill="url(#bg)"/>
+  <text x="56" y="78" class="sans white" font-size="42" font-weight="820">ProofAlpha RunCard</text>
+  <text x="57" y="118" class="sans muted" font-size="21">Evidence summary from the safe built-in demo</text>
+
+  <g transform="translate(56 158)">
+    <rect class="panel" width="988" height="398" rx="24"/>
+    <g transform="translate(36 34)">
+      <text class="sans white" font-size="28" font-weight="760">example-study</text>
+      <rect x="720" y="-7" width="180" height="50" rx="16" fill="#2A1518" stroke="#FF6B6B" stroke-width="2"/>
+      <text x="810" y="26" class="sans" font-size="22" text-anchor="middle" font-weight="820" fill="#FF8A8A">BLOCKED</text>
+
+      <line x1="0" y1="72" x2="916" y2="72" stroke="#2C3946"/>
+
+      <text x="0" y="118" class="mono muted" font-size="20">decision</text>
+      <text x="178" y="118" class="mono" font-size="20" fill="#FFB86B">do_not_promote</text>
+
+      <text x="0" y="164" class="mono muted" font-size="20">mode</text>
+      <text x="178" y="164" class="mono" font-size="20" fill="#B7FF4A">paper / no-key</text>
+
+      <text x="0" y="210" class="mono muted" font-size="20">outputs</text>
+      <text x="178" y="210" class="mono" font-size="20" fill="#C9D3DC">dashboard.json + runcard.json + events.jsonl</text>
+
+      <text x="0" y="270" class="sans white" font-size="25" font-weight="760">Blocked reasons</text>
+      <g transform="translate(0 302)">
+        <rect x="0" y="0" width="202" height="42" rx="13" fill="#1B2530" stroke="#394957"/>
+        <text x="101" y="27" class="mono" text-anchor="middle" font-size="17" fill="#FFB86B">capacity_5x</text>
+        <rect x="220" y="0" width="236" height="42" rx="13" fill="#1B2530" stroke="#394957"/>
+        <text x="338" y="27" class="mono" text-anchor="middle" font-size="17" fill="#FFD166">turnover_budget</text>
+        <rect x="474" y="0" width="226" height="42" rx="13" fill="#1B2530" stroke="#394957"/>
+        <text x="587" y="27" class="mono" text-anchor="middle" font-size="17" fill="#7DD3FC">min_oos_trades</text>
+        <rect x="718" y="0" width="198" height="42" rx="13" fill="#1B2530" stroke="#394957"/>
+        <text x="817" y="27" class="mono" text-anchor="middle" font-size="17" fill="#FF8A8A">regime fragility</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(56 584)">
+    <circle cx="11" cy="-7" r="7" fill="url(#green)"/>
+    <text x="30" y="0" class="sans" font-size="18" font-weight="700" fill="#B7FF4A">A blocked strategy is a successful safety gate.</text>
+  </g>
+</svg>
