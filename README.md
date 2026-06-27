@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/brand/proofalpha-hero.svg" alt="ProofAlpha — evidence gate for crypto strategies" width="100%">
+  <img src="assets/brand/proofalpha-banner.png" alt="ProofAlpha — build better trading strategies with an agent that keeps testing and improving them" width="100%">
 </p>
 
 <p align="center">
@@ -8,7 +8,7 @@
   <a href="https://github.com/marcus896/proofalpha/actions/workflows/security.yml"><img alt="Security" src="https://github.com/marcus896/proofalpha/actions/workflows/security.yml/badge.svg"></a>
   <img alt="Python 3.12 and 3.13" src="https://img.shields.io/badge/python-3.12%20%7C%203.13-blue">
   <img alt="Apache 2.0 license" src="https://img.shields.io/badge/license-Apache--2.0-green">
-  <img alt="Paper no-key default" src="https://img.shields.io/badge/default-paper%2Fno--key-brightgreen">
+  <img alt="Paper / no-key by default" src="https://img.shields.io/badge/default-paper%2Fno--key-brightgreen">
   <img alt="1138 tests passing" src="https://img.shields.io/badge/tests-1138%20passing-brightgreen">
 </p>
 
@@ -16,162 +16,138 @@
 
 <!-- Legacy release-doctor compatibility strings: # Crypto Perps Stress Research Engine; python -m engine.app.cli run; python -m engine.app.cli doctor -->
 
-**Stop promoting backtest luck.**
+**An AI agent that builds, backtests, and keeps improving crypto trading strategies — then hands you the best version with the evidence to back it up.**
 
-ProofAlpha turns crypto strategy ideas into reproducible evidence: backtests, stress tests, paper/no-key runs, run cards, dashboards, and explicit block/promote decisions before money can move.
-
-```bash
-python -m pip install -e .
-proofalpha run --config examples/minimal_builtin_study.json --output-dir outputs/example-run
-```
-
-Expected output:
-
-```text
-status: blocked
-reason: weak evidence found
-artifacts: dashboard.json + runcard.json + events.jsonl
-```
-
-A blocked strategy is a successful safety gate.
-
-<p align="center">
-  <img src="assets/screenshots/runcard-blocked.svg" alt="ProofAlpha blocked run card preview" width="88%">
-</p>
-
-> **Paper/no-key first.** Public examples require no exchange credentials and submit no live orders. Historical, simulated, and paper results do not guarantee future returns.
-
-## Why ProofAlpha exists
-
-Most trading bots make it too easy to jump from an idea to execution. ProofAlpha is designed around the opposite workflow:
-
-```text
-idea -> validated study -> stress tests -> paper evidence -> auditable decision -> gated execution readiness
-```
-
-It is built for developers, quants, and maintainers who want evidence before any execution authority. A failed or blocked strategy is useful: it can reveal weak evidence, insufficient data, excessive turnover, capacity risk, regime fragility, or another reason not to promote the candidate.
-
-## 60-second safe demo
-
-### Local Python
-
-ProofAlpha supports Python 3.12 and 3.13.
+ProofAlpha is more than a backtester. It is an autonomous research loop: give it a strategy idea, and the agent generates many variations, backtests each one against realistic market conditions, learns what works, and iterates — over and over — until it has a strong, well-tested candidate. You get the winning strategy plus a full, reproducible report.
 
 ```bash
 python -m pip install -e .
-proofalpha doctor --format json
-proofalpha run \
-  --config examples/minimal_builtin_study.json \
-  --output-dir outputs/example-run
-```
-
-### Docker
-
-```bash
-docker compose run --rm proofalpha
-docker compose --profile demo run --rm demo
-```
-
-The demo runs a checked-in research study, writes reproducible artifacts, and uses no private keys.
-
-Expected artifacts:
-
-```text
-outputs/example-run/example-study.events.jsonl
-outputs/example-run/example-study.runcard.json
-outputs/example-run/example-study.dashboard.json
-```
-
-A demo may end as `blocked`; that is expected for weak evidence and shows the safety gates working.
-
-## What ProofAlpha outputs
-
-| Artifact | What it gives you |
-| --- | --- |
-| Event log | A line-by-line execution trail for auditability. |
-| Run card | The human-readable block/promote decision and reasons. |
-| Dashboard JSON | Structured metrics, validation results, and evidence payloads. |
-| Research memory | Local history for bounded follow-up research and duplicate detection. |
-| Evidence cards | Strategy evidence summaries for review before promotion. |
-
-## What it includes
-
-- data ingestion, schemas, provenance, snapshot storage, and quality checks;
-- strategy DSL, catalog, lifecycle, intent contracts, and immutable artifacts;
-- backtesting with fees, funding, slippage, latency, partial fills, and market impact;
-- chronological validation, walk-forward testing, stress scenarios, overfit controls, and promotion gates;
-- bounded candidate search and autonomous research loops;
-- experiment memory, decision journals, event sourcing, and failure taxonomies;
-- paper execution, public WebSocket capture, health checks, reconciliation, and TCA;
-- portfolio allocation, risk budgeting, kill switches, mode guards, and execution policies;
-- evidence dashboards, run cards, comparison reports, forecasting, learning, and optional MCP tools.
-
-## What ProofAlpha is not
-
-- not financial advice;
-- not a broker or investment adviser;
-- not a profit, income, win-rate, or risk-reduction guarantee;
-- not a signal-selling project;
-- not a way for model output to bypass risk policy.
-
-## Core workflows
-
-Inspect a study before execution:
-
-```bash
-proofalpha inspect-study --config examples/minimal_builtin_study.json
-```
-
-Run bounded autoresearch:
-
-```bash
 proofalpha autoresearch \
   --config examples/minimal_builtin_study.json \
   --output-dir outputs/autoresearch \
   --db outputs/research-memory.sqlite
 ```
 
-Run the strict operator loop:
+That single command kicks off the loop: generate → backtest → learn → improve → repeat.
+
+## One idea becomes many tested improvements
+
+<p align="center">
+  <img src="assets/screenshots/how-it-works.png" alt="From one idea, ProofAlpha generates versions, backtests all of them, and picks the best one" width="92%">
+</p>
+
+You bring a hypothesis. ProofAlpha does the heavy lifting:
+
+1. **Start with an idea** — e.g. "BTC breakout strategy."
+2. **Generate versions** — the agent composes and mutates strategy variants with bounded, budgeted search.
+3. **Backtest all** — every variant is simulated with real-world frictions: fees, funding, slippage, latency, and partial fills.
+4. **Pick the best one** — only candidates that survive walk-forward, stress, and overfit checks are promoted, with a full evidence report.
+
+Then it keeps going. The loop remembers what it has already tried, avoids duplicates, and uses each result to propose better next steps.
+
+## The improvement loop
+
+The agent doesn't stop at one backtest. It runs a continuous **idea → backtest → improve → compare** cycle, getting stronger with every pass:
+
+```text
+        ┌─────────────────────────────────────────────┐
+        │                                             │
+   idea ─►  backtest ─►  improve ─►  compare ─► (best)─┘
+        ▲                                             │
+        └──────────── learn from memory ◄────────────┘
+```
+
+- **Bounded search** explores the strategy space efficiently instead of brute force.
+- **Research memory** records every experiment so the loop builds on past results.
+- **Promotion gates** make sure only genuinely strong candidates rise to the top.
+
+## What you can do with it
+
+- **Run the autonomous research loop** to discover and refine strategy candidates automatically.
+- **Backtest with realistic costs** — fees, funding, slippage, latency, partial fills, and market impact.
+- **Validate seriously** — walk-forward testing, stress scenarios, and overfit controls.
+- **Paper trade with no keys** — replay public market data and simulate execution without any credentials.
+- **Get auditable reports** — run cards, dashboards, and evidence cards you can review, compare, and trust.
+- **Extend it with skills** — strategy composition, parameter sweeps, robustness validation, and campaign orchestration.
+
+## Quick start
+
+ProofAlpha runs on Python 3.12 and 3.13, in paper/no-key mode by default — no exchange credentials needed.
 
 ```bash
-proofalpha operate-loop \
+python -m pip install -e .
+proofalpha doctor --format json
+
+# Run the full agent research loop
+proofalpha autoresearch \
   --config examples/minimal_builtin_study.json \
-  --output-dir outputs/operator-loop \
-  --db outputs/operator-memory.sqlite \
-  --profile strict_v3
+  --output-dir outputs/autoresearch \
+  --db outputs/research-memory.sqlite
+
+# Or run a single study end to end
+proofalpha run \
+  --config examples/minimal_builtin_study.json \
+  --output-dir outputs/example-run
 ```
 
-Build a strategy evidence card from saved loop evidence:
+Prefer containers?
 
 ```bash
-proofalpha strategy-evidence-card --help
+docker compose run --rm proofalpha
+docker compose --profile demo run --rm demo
 ```
 
-Run `proofalpha --help` for the full command surface.
+Run `proofalpha --help` for the full command surface, including `operate-loop`, `inspect-study`, and `strategy-evidence-card`.
 
-## Safety boundary
+## What you get out of every run
 
-- Paper and no-key execution paths are the public defaults.
-- Public examples do not require private keys.
-- Natural-language, agent, model, strategy, and plugin output is treated as untrusted input.
-- Agent output cannot silently override execution mode, credentials, symbol scope, risk limits, or validation policy.
-- Stale required market streams fail health checks.
-- Risk state, reconciliation, idempotency, and kill-switch components are explicit.
-- Live trading is a separate approval and deployment decision; it is not a profitability promise.
-- Performance artifacts must identify data period, costs, assumptions, and whether results are historical, simulated, paper, or live.
+| Artifact | What it gives you |
+| --- | --- |
+| Run card | The clear keep/improve decision, with the reasons behind it. |
+| Dashboard JSON | Structured metrics, validation results, and evidence. |
+| Event log | A line-by-line trail of exactly what the agent did. |
+| Research memory | Local history that powers smarter follow-up runs. |
+| Evidence cards | Strategy summaries you can review and compare side by side. |
 
-Read [`SECURITY.md`](SECURITY.md), [`DISCLAIMER.md`](DISCLAIMER.md), and [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md).
+> Sometimes the best answer is "not yet." If a candidate doesn't clear the bar, ProofAlpha tells you why and keeps searching — so you only act on strategies that have earned it.
+
+## Why you can trust the results
+
+ProofAlpha is built so the answer means something. Every strategy is judged the same disciplined way a careful quant would judge it:
+
+- realistic cost and execution modeling, not idealized fills;
+- chronological, walk-forward validation that respects time;
+- stress scenarios and overfit controls to catch fragile fits;
+- explicit, reproducible artifacts that record data period, costs, and assumptions;
+- a clean separation between research and live execution, so nothing trades real money just because a backtest looked good.
+
+This is what turns "it looked great in a backtest" into "it held up under scrutiny."
+
+## How it's built
+
+```text
+proofalpha              Distribution and console-script name
+src/proofalpha          Public runtime adapter, version, and packaged skills
+src/engine/agent        Research actions and the autonomous loop
+src/engine/optimizer    Bounded search and experiment budgets
+src/engine/backtest     Simulation, accounting, fills, and costs
+src/engine/validation   Walk-forward, robustness, stress, and promotion gates
+src/engine/memory       Experiment history and decision journals
+```
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full system design.
 
 ## Documentation
 
-Start here:
+- [`docs/QUICKSTART.md`](docs/QUICKSTART.md) — install, first loop, and outputs.
+- [`docs/DEMO.md`](docs/DEMO.md) — a guided safe demo.
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — system design and components.
+- [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) — trust boundaries and execution safety.
+- [`ROADMAP.md`](ROADMAP.md) — where ProofAlpha is headed.
 
-- [`docs/QUICKSTART.md`](docs/QUICKSTART.md) - first run, outputs, and troubleshooting.
-- [`docs/DEMO.md`](docs/DEMO.md) - safe demo walkthrough and expected blocked result.
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) - system design and major components.
-- [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) - trust boundaries and execution safety.
-- [`docs/OPEN_SOURCE_BOUNDARY.md`](docs/OPEN_SOURCE_BOUNDARY.md) - what belongs in the public repo.
-- [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md) - maintainer release and publish checklist.
+## Contributing
+
+Contributions that improve strategy discovery, backtest realism, validation, data quality, developer experience, or documentation are very welcome. Read [`CONTRIBUTING.md`](CONTRIBUTING.md), [`GOVERNANCE.md`](GOVERNANCE.md), and [`ROADMAP.md`](ROADMAP.md).
 
 ## Verification
 
@@ -185,47 +161,22 @@ python scripts/check_repository_secrets.py
 python scripts/verify_public_export.py --root .
 python -m pip_audit -r requirements-core.txt
 proofalpha doctor --format json
-proofalpha list-skills --format json
 proofalpha run --config examples/minimal_builtin_study.json --output-dir outputs/release-smoke
 python -m build
 ```
 
-Latest local publish-readiness checkpoint: the published suite passed 1,138 tests on Python 3.12 with 2 skips, plus compile, targeted ruff, secret scan, export verification, dependency audit, doctor, safe example, and package build.
+The latest checkpoint passed 1,138 tests on Python 3.12 (2 skips), plus compile, targeted ruff, secret scan, export verification, dependency audit, doctor, a safe example run, and a package build.
 
-Pyright annotation cleanup remains technical debt and is not claimed as a passing release gate.
+---
 
-## Package layout
+## License, safety, and disclaimer
 
-```text
-proofalpha              Distribution and console-script name
-src/proofalpha          Public runtime adapter, version, and packaged skills
-src/engine              Byte-identical internal implementation package
-```
+ProofAlpha is open source under the Apache License 2.0. Third-party notices are recorded in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 
-The internal package remains named `engine` to avoid a high-risk branding-only import rewrite. Every published `src/engine` file is copied byte-for-byte and verified against its source SHA-256; the combined tree hash is recorded in `PUBLIC_EXPORT_MANIFEST.json`. The ProofAlpha adapter packages the same approved skill contracts so `list-skills`, autoresearch, and MCP skill discovery also work from an installed wheel.
+It is designed to be used responsibly:
 
-## Brand
+- Paper and no-key execution are the public defaults; public examples submit no live orders.
+- Strategy, agent, and model output is treated as untrusted and cannot silently change execution mode, credentials, risk limits, or validation policy.
+- Live trading is always a separate, explicit decision — never granted automatically by a passing backtest.
 
-Original vector assets:
-
-```text
-assets/brand/proofalpha-mark.svg
-assets/brand/proofalpha-wordmark.svg
-assets/brand/proofalpha-hero.svg
-assets/brand/github-social-preview.svg
-assets/screenshots/runcard-blocked.svg
-```
-
-## Contributing
-
-Contributions should improve correctness, reproducibility, safety, data quality, accounting realism, validation, developer experience, or documentation.
-
-Profit screenshots and unverifiable strategy claims are not engineering evidence.
-
-Read [`CONTRIBUTING.md`](CONTRIBUTING.md), [`GOVERNANCE.md`](GOVERNANCE.md), and [`ROADMAP.md`](ROADMAP.md).
-
-## License and disclaimer
-
-ProofAlpha is available under the Apache License 2.0. Third-party notices are recorded in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
-
-ProofAlpha is software infrastructure, not financial advice, a broker, an investment adviser, or a guarantee of returns. Crypto and leveraged derivatives trading can result in substantial loss. Review [`DISCLAIMER.md`](DISCLAIMER.md) before use.
+ProofAlpha is software infrastructure for research and evidence. It is **not financial advice, not a broker or investment adviser, and not a guarantee of profit or returns.** Crypto and leveraged-derivatives trading carries substantial risk, including the risk of significant loss. Historical, simulated, and paper results do not guarantee future performance. Review [`DISCLAIMER.md`](DISCLAIMER.md), [`SECURITY.md`](SECURITY.md), and [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) before any real use.

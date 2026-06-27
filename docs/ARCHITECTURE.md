@@ -1,6 +1,8 @@
 # ProofAlpha Architecture
 
-ProofAlpha separates research authority from execution authority. Strategy ideas can produce experiments and paper evidence, but they cannot silently grant themselves live execution permission.
+ProofAlpha is an autonomous research loop: an agent generates strategy candidates, backtests them with realistic costs, validates the survivors, learns from a research memory, and iterates to keep improving. Everything below describes how that loop is wired and why its results are trustworthy.
+
+A core design principle keeps it safe: ProofAlpha separates research authority from execution authority. Strategy ideas can produce experiments and paper evidence, but they cannot silently grant themselves live execution permission.
 
 ## System flow
 

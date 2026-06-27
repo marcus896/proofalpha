@@ -1,8 +1,6 @@
 # Safe Demo
 
-ProofAlpha's first demo is intentionally safe: no exchange credentials, no private keys, and no live orders.
-
-The point is not to show a profitable strategy. The point is to show the evidence gate: ProofAlpha can block a weak candidate before money can move.
+This demo shows ProofAlpha's research loop in action — safely. No exchange credentials, no private keys, no live orders. You get to see the agent generate, backtest, and judge a strategy candidate end to end.
 
 ## Run it
 
@@ -24,19 +22,27 @@ Expected terminal shape:
 }
 ```
 
-## Why `blocked` is good
+## Try the full loop
 
-A `blocked` result means the strategy did not clear one or more promotion gates. That is a successful safety outcome.
+```bash
+proofalpha autoresearch \
+  --config examples/minimal_builtin_study.json \
+  --output-dir outputs/autoresearch \
+  --db outputs/research-memory.sqlite
+```
 
-Example blocker families include:
+This is where ProofAlpha shines: it generates variations, backtests each one, remembers what it learned, and keeps refining — turning one idea into many tested improvements.
 
-- capacity and market-impact concerns;
-- turnover budget breaches;
-- insufficient out-of-sample trade count;
-- scenario or regime fragility;
-- validation evidence that is too weak for promotion.
+## Reading the result
 
-ProofAlpha treats these as engineering evidence, not as a failure of the demo.
+A `blocked` status means a candidate didn't clear the promotion bar — and that's a feature. The system tells you *why*, so the next iteration can be better. Common reasons include:
+
+- capacity or market-impact limits;
+- turnover beyond budget;
+- not enough out-of-sample evidence;
+- fragility across scenarios or regimes.
+
+ProofAlpha treats these as useful signal, not failure — it's how you avoid acting on a strategy that only looked good by luck.
 
 ## What you get after one run
 
@@ -48,9 +54,9 @@ outputs/example-run/example-study.dashboard.json
 
 | Artifact | Purpose |
 | --- | --- |
-| `*.events.jsonl` | Lightweight event trail for audit and debugging. |
-| `*.runcard.json` | Decision summary, status, blockers, and review-facing evidence. |
-| `*.dashboard.json` | Structured metrics and validation details for deeper inspection. |
+| `*.events.jsonl` | Line-by-line trail of what the agent did. |
+| `*.runcard.json` | The keep/improve decision, with reasons and evidence. |
+| `*.dashboard.json` | Structured metrics and validation details. |
 
 ## Inspect before running
 
@@ -69,6 +75,6 @@ docker compose --profile demo run --rm demo
 
 The Docker demo uses paper/no-key behavior and writes demo outputs only to temporary storage.
 
-## Safety rule
+## A note on reading results
 
-Do not treat a single backtest, dashboard, chart, or paper run as future-return evidence. Review the data period, cost model, validation protocol, stress matrix, paper evidence, and blocked reasons before drawing conclusions.
+Treat a single backtest, dashboard, or paper run as a starting point, not a verdict. The whole reason the loop validates across costs, time, and stress is so your conclusions rest on evidence rather than a single lucky chart.
