@@ -4,7 +4,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     PROOFALPHA_MODE=paper \
-    PROOFALPHA_TELEMETRY=off
+    PROOFALPHA_TELEMETRY=off \
+    PROOFALPHA_LOG_DIR=/tmp/proofalpha/logs
 
 RUN useradd --create-home --uid 10001 proofalpha
 WORKDIR /app

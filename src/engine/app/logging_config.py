@@ -6,11 +6,13 @@ for crash recovery and behavior diagnosis without polluting stdout.
 """
 from __future__ import annotations
 
+import errno
 import logging
 from logging.handlers import RotatingFileHandler
 import os
 from pathlib import Path
 import sys
+import tempfile
 
 _ENGINE_LOGGER_NAME = "engine"
 _ENGINE_LOGGER_HANDLER_MARKER = "_engine_logging_handler"
@@ -78,8 +80,7 @@ def configure_engine_logging(
     console_handler.setLevel(console_level)
     console_handler.setFormatter(formatter)
 
-    log_dir_path = Path(log_dir)
-    log_dir_path.mkdir(parents=True, exist_ok=True)
+    log_dir_path = _ensure_writable_log_dir(_configured_log_dir(log_dir))
 
     log_file = (log_dir_path / "engine_run.log").resolve()
     for handler in list(logger.handlers):
@@ -104,6 +105,25 @@ def configure_engine_logging(
         logger.addHandler(file_handler)
 
     logger.info("Engine logging initialized. Writing to %s", log_file.absolute())
+
+
+def _configured_log_dir(log_dir: Path | str) -> Path:
+    """Return the configured log directory, honoring container/runtime overrides."""
+    override = os.environ.get("PROOFALPHA_LOG_DIR") or os.environ.get("ENGINE_LOG_DIR")
+    return Path(override) if override else Path(log_dir)
+
+
+def _ensure_writable_log_dir(log_dir_path: Path) -> Path:
+    """Create a log directory, falling back to /tmp for read-only images."""
+    try:
+        log_dir_path.mkdir(parents=True, exist_ok=True)
+        return log_dir_path
+    except OSError as exc:
+        if exc.errno not in {errno.EACCES, errno.EPERM, errno.EROFS}:
+            raise
+        fallback = Path(tempfile.gettempdir()) / "proofalpha" / "logs"
+        fallback.mkdir(parents=True, exist_ok=True)
+        return fallback
 
 
 def _resolve_console_level(level: int) -> int:
