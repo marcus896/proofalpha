@@ -13,7 +13,7 @@ jobs:
   container-smoke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build ProofAlpha image
         run: docker build --tag proofalpha:ci .
       - name: Run release doctor as non-root
