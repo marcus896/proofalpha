@@ -3267,7 +3267,7 @@ class AgentLoopControllerTests(unittest.TestCase):
                     "requested_mode": "git-native",
                     "effective_mode": "artifact-native",
                     "git_available": False,
-                    "workspace_root": str(Path.cwd()),
+                    "workspace_root": str(output_dir),
                     "branch": None,
                     "head_commit": None,
                     "blocking_reason": "not_a_git_repository",

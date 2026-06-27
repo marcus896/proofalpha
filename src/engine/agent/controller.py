@@ -126,6 +126,11 @@ class AgentLoopController:
         self.memory_updater = memory_updater or _default_memory_updater
         self.refinement_planner = refinement_planner or _default_refinement_planner
         self.karpathy_git_probe = karpathy_git_probe or _default_karpathy_git_probe
+        # Track whether a workspace was explicitly provided. When it is not, the
+        # karpathy git workspace defaults to the run's output directory (an
+        # isolated workspace) rather than the current working directory, so
+        # autoresearch never creates branches/commits in a surrounding repo.
+        self._workspace_root_explicit = workspace_root is not None
         self.workspace_root = workspace_root or Path.cwd()
 
     def run(
@@ -441,9 +446,14 @@ class AgentLoopController:
                 latest_karpathy_primary_artifact_path = result.karpathy_primary_artifact_path
                 latest_karpathy_primary_artifact_kind = result.karpathy_primary_artifact_kind
                 break
+        # Isolate the karpathy git workspace to the run's output directory unless
+        # an explicit workspace was provided; never operate on the ambient cwd repo.
+        karpathy_workspace_root = (
+            self.workspace_root if self._workspace_root_explicit else Path(output_dir)
+        )
         karpathy_git_state = _resolve_karpathy_git_state(
             settings=resolved_settings,
-            workspace_root=self.workspace_root,
+            workspace_root=karpathy_workspace_root,
             git_probe=self.karpathy_git_probe,
         )
         karpathy_execution_mode = (
@@ -506,7 +516,7 @@ class AgentLoopController:
         )
         karpathy_git_execution = _execute_karpathy_git_action_plan(
             settings=resolved_settings,
-            workspace_root=self.workspace_root,
+            workspace_root=karpathy_workspace_root,
             output_dir=output_dir,
             root_run_id=str(initial_payload.get("run_id", "agent-loop")),
             karpathy_git_state=karpathy_git_state,
