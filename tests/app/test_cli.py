@@ -2818,7 +2818,7 @@ class CliIntegrationTests(unittest.TestCase):
                     "engine.app.cli",
                     "batch-autoresearch",
                     "--config",
-                    "examples\\minimal_builtin_study.json",
+                    "examples/minimal_builtin_study.json",
                     "--output-dir",
                     str(output_dir),
                     "--db",
@@ -2872,7 +2872,7 @@ class CliIntegrationTests(unittest.TestCase):
                 {
                     "run_id": "batch-duplicate",
                     "status": "skipped",
-                    "accepted_duplicate_config_path": "outputs\\batch-duplicate.accepted-duplicate.json",
+                    "accepted_duplicate_config_path": "outputs/batch-duplicate.accepted-duplicate.json",
                     "base_run": {
                         "run_id": "batch-duplicate",
                         "status": "skipped",
@@ -2901,7 +2901,7 @@ class CliIntegrationTests(unittest.TestCase):
             )
 
             self.assertEqual(completed.returncode, 0, msg=completed.stderr)
-            self.assertIn("Accepted duplicate config: outputs\\batch-duplicate.accepted-duplicate.json", completed.stdout)
+            self.assertIn("Accepted duplicate config: outputs/batch-duplicate.accepted-duplicate.json", completed.stdout)
         finally:
             if report_path.exists():
                 report_path.unlink()
@@ -3126,7 +3126,7 @@ class CliIntegrationTests(unittest.TestCase):
                     "run_id": "auto-duplicate",
                     "status": "skipped",
                     "skip_reason": "duplicate_study_signature",
-                    "accepted_duplicate_config_path": "outputs\\auto-duplicate.accepted-duplicate.json",
+                    "accepted_duplicate_config_path": "outputs/auto-duplicate.accepted-duplicate.json",
                     "duplicate_match": {
                         "match_type": "study_signature",
                         "run_id": "prior-same-study",
@@ -3242,7 +3242,7 @@ class CliIntegrationTests(unittest.TestCase):
             self.assertIn("Autoresearch auto-duplicate", completed.stdout)
             self.assertIn("Status: skipped", completed.stdout)
             self.assertIn("Skip reason: duplicate_study_signature", completed.stdout)
-            self.assertIn("Accepted duplicate config: outputs\\auto-duplicate.accepted-duplicate.json", completed.stdout)
+            self.assertIn("Accepted duplicate config: outputs/auto-duplicate.accepted-duplicate.json", completed.stdout)
             self.assertIn("Duplicate match: study_signature -> prior-same-study", completed.stdout)
             self.assertIn("Memory: prior_runs=4 | promoted=2 | blocked=2 | excluded_dirty=1", completed.stdout)
             self.assertIn("Recovered duplicates: 1 | top_matches=prior-same-study(1)", completed.stdout)
@@ -3630,7 +3630,7 @@ class CliIntegrationTests(unittest.TestCase):
                     "engine.app.cli",
                     "batch-autoresearch",
                     "--config",
-                    "examples\\minimal_builtin_study.json",
+                    "examples/minimal_builtin_study.json",
                     "--output-dir",
                     str(output_dir),
                     "--db",
@@ -3829,7 +3829,7 @@ class CliIntegrationTests(unittest.TestCase):
                     "engine.app.cli",
                     "batch-autoresearch",
                     "--config",
-                    "examples\\minimal_builtin_study.json",
+                    "examples/minimal_builtin_study.json",
                     "--output-dir",
                     str(output_dir),
                     "--db",
@@ -3911,7 +3911,7 @@ class CliIntegrationTests(unittest.TestCase):
                     {
                         "run_id": "batch-history",
                         "next_study_variant_paths": {
-                            "balanced": str(Path("examples\\minimal_builtin_study.json")),
+                            "balanced": str(Path("examples/minimal_builtin_study.json")),
                         },
                         "preferred_variant": {
                             "variant": "balanced",
@@ -4059,7 +4059,7 @@ class CliIntegrationTests(unittest.TestCase):
                     "engine.app.cli",
                     "batch-autoresearch",
                     "--config",
-                    "examples\\minimal_builtin_study.json",
+                    "examples/minimal_builtin_study.json",
                     "--output-dir",
                     str(output_dir),
                     "--db",
@@ -4143,8 +4143,8 @@ class CliIntegrationTests(unittest.TestCase):
                         "selection_source": "batch_report",
                         "selection_preference_mode": "preferred",
                         "parent_batch_run_id": "example-study",
-                        "parent_batch_report_path": "outputs\\example-study.variant-batch.json",
-                        "source_config_path": "outputs\\example-study-next.json",
+                        "parent_batch_report_path": "outputs/example-study.variant-batch.json",
+                        "source_config_path": "outputs/example-study-next.json",
                         "selection_variant_result": {
                             "variant": "balanced",
                             "duplicate_baseline_history": {
@@ -4336,7 +4336,7 @@ class CliIntegrationTests(unittest.TestCase):
             ingest_artifact_directory(db_path, history_dir)
 
             accepted_config_path = output_dir / "example-study.accepted-duplicate.json"
-            accepted_payload = json.loads(Path("examples\\minimal_builtin_study.json").read_text(encoding="utf-8"))
+            accepted_payload = json.loads(Path("examples/minimal_builtin_study.json").read_text(encoding="utf-8"))
             accepted_payload["run_id"] = "example-study-accepted-duplicate"
             accepted_payload["research_lineage"] = {
                 "accepted_duplicate_match_run_id": "prior-same-study",

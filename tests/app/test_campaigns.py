@@ -128,10 +128,10 @@ class CampaignAndLoggingCliTests(unittest.TestCase):
         baseline_config_path = Path("test-output-cli-template-baseline.json")
         memory_config_path = Path("test-output-cli-template-memory.json")
         report_path = campaign_root / "template-campaign.campaign.json"
-        baseline_payload = json.loads(Path("examples\\minimal_builtin_study.json").read_text(encoding="utf-8"))
+        baseline_payload = json.loads(Path("examples/minimal_builtin_study.json").read_text(encoding="utf-8"))
         baseline_payload["run_id"] = "template-baseline"
         baseline_config_path.write_text(json.dumps(baseline_payload, indent=2, sort_keys=True), encoding="utf-8")
-        memory_payload = json.loads(Path("examples\\minimal_builtin_study.json").read_text(encoding="utf-8"))
+        memory_payload = json.loads(Path("examples/minimal_builtin_study.json").read_text(encoding="utf-8"))
         memory_payload["run_id"] = "template-memory"
         memory_config_path.write_text(json.dumps(memory_payload, indent=2, sort_keys=True), encoding="utf-8")
         manifest_path.write_text(
@@ -227,7 +227,7 @@ class CampaignAndLoggingCliTests(unittest.TestCase):
                     "engine.app.cli",
                     "run",
                     "--config",
-                    "examples\\minimal_builtin_study.json",
+                    "examples/minimal_builtin_study.json",
                     "--output-dir",
                     str(output_dir),
                 ],
@@ -267,7 +267,7 @@ class CampaignAndLoggingCliTests(unittest.TestCase):
                     "engine.app.cli",
                     "autoresearch",
                     "--config",
-                    "examples\\minimal_builtin_study.json",
+                    "examples/minimal_builtin_study.json",
                     "--output-dir",
                     str(output_dir),
                     "--db",
@@ -312,10 +312,10 @@ class CampaignAndLoggingCliTests(unittest.TestCase):
         memory_config_path = Path("test-output-cli-campaign-memory.json")
         report_path = campaign_root / "smoke-campaign.campaign.json"
         db_path = Path("test-output-cli-campaign.sqlite")
-        baseline_payload = json.loads(Path("examples\\minimal_builtin_study.json").read_text(encoding="utf-8"))
+        baseline_payload = json.loads(Path("examples/minimal_builtin_study.json").read_text(encoding="utf-8"))
         baseline_payload["run_id"] = "campaign-baseline"
         baseline_config_path.write_text(json.dumps(baseline_payload, indent=2, sort_keys=True), encoding="utf-8")
-        memory_payload = json.loads(Path("examples\\minimal_builtin_study.json").read_text(encoding="utf-8"))
+        memory_payload = json.loads(Path("examples/minimal_builtin_study.json").read_text(encoding="utf-8"))
         memory_payload["run_id"] = "campaign-memory"
         memory_config_path.write_text(json.dumps(memory_payload, indent=2, sort_keys=True), encoding="utf-8")
         manifest_path.write_text(
@@ -648,7 +648,7 @@ class CampaignAndLoggingCliTests(unittest.TestCase):
         memory_config_path = Path("test-output-cli-retry-memory.json")
         db_path = campaign_root / "retry.sqlite"
         campaign_root.mkdir(exist_ok=True)
-        memory_payload = json.loads(Path("examples\\minimal_builtin_study.json").read_text(encoding="utf-8"))
+        memory_payload = json.loads(Path("examples/minimal_builtin_study.json").read_text(encoding="utf-8"))
         memory_payload["run_id"] = "retry-memory"
         memory_config_path.write_text(json.dumps(memory_payload, indent=2, sort_keys=True), encoding="utf-8")
         prior_report.write_text(
@@ -664,7 +664,7 @@ class CampaignAndLoggingCliTests(unittest.TestCase):
                             "name": "baseline",
                             "command": "run",
                             "status": "promoted",
-                            "config_path": "examples\\minimal_builtin_study.json",
+                            "config_path": "examples/minimal_builtin_study.json",
                             "output_dir": str(campaign_root / "baseline"),
                         },
                         {
@@ -747,14 +747,14 @@ class CampaignAndLoggingCliTests(unittest.TestCase):
                             "name": "baseline",
                             "command": "run",
                             "status": "promoted",
-                            "config_path": "examples\\minimal_builtin_study.json",
+                            "config_path": "examples/minimal_builtin_study.json",
                             "output_dir": str(campaign_root / "baseline"),
                         },
                         {
                             "name": "retry-me",
                             "command": "run",
                             "status": "skipped",
-                            "config_path": "examples\\minimal_builtin_study.json",
+                            "config_path": "examples/minimal_builtin_study.json",
                             "output_dir": str(campaign_root / "retry-me"),
                         },
                     ],
