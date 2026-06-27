@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/marcus896/proofalpha/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/marcus896/proofalpha/actions/workflows/tests.yml/badge.svg"></a>
-  <a href="https://github.com/marcus896/proofalpha/actions/workflows/docs.yml"><img alt="Docs" src="https://github.com/marcus896/proofalpha/actions/workflows/docs.yml/badge.svg"></a>
-  <a href="https://github.com/marcus896/proofalpha/actions/workflows/security.yml"><img alt="Security" src="https://github.com/marcus896/proofalpha/actions/workflows/security.yml/badge.svg"></a>
-  <img alt="Python 3.12 and 3.13" src="https://img.shields.io/badge/python-3.12%20%7C%203.13-blue">
-  <img alt="Apache 2.0 license" src="https://img.shields.io/badge/license-Apache--2.0-green">
-  <img alt="Paper / no-key by default" src="https://img.shields.io/badge/default-paper%2Fno--key-brightgreen">
-  <img alt="1138 tests passing" src="https://img.shields.io/badge/tests-1138%20passing-brightgreen">
+  <img alt="Python 3.12 | 3.13" src="https://img.shields.io/badge/python-3.12%20%7C%203.13-3776AB?logo=python&logoColor=white">
+  <img alt="License Apache 2.0" src="https://img.shields.io/badge/license-Apache--2.0-green">
+  <img alt="Paper / no-key by default" src="https://img.shields.io/badge/mode-paper%20%2F%20no--key-brightgreen">
+  <img alt="1138 tests" src="https://img.shields.io/badge/tests-1138%20passing-brightgreen">
+  <img alt="Backtesting + agent loop" src="https://img.shields.io/badge/backtesting-%2B%20agent%20loop-8957e5">
+  <img alt="Last commit" src="https://img.shields.io/github/last-commit/marcus896/proofalpha?color=blue">
+  <a href="https://github.com/marcus896/proofalpha/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/marcus896/proofalpha?style=flat&color=yellow"></a>
 </p>
 
 # ProofAlpha
