@@ -1,0 +1,929 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "advisory_context": {
+      "properties": {
+        "agent_environment": {
+          "properties": {
+            "loop_policy": {
+              "type": "object"
+            },
+            "mcp": {
+              "type": "object"
+            },
+            "skills": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "duplicate_baseline_run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "layer_catalog": {
+          "type": "object"
+        },
+        "study_schema_title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "advisory_rationale": {
+      "properties": {
+        "constraints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "variant": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "custom_filters": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "directional_layers": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "evaluations": {
+      "additionalProperties": {
+        "properties": {
+          "bootstrap": {
+            "properties": {
+              "median_max_drawdown": {
+                "type": "number"
+              },
+              "median_net_profit": {
+                "type": "number"
+              },
+              "pass_rate": {
+                "type": "number"
+              },
+              "sample_count": {
+                "type": "integer"
+              },
+              "worst_case_drawdown": {
+                "type": "number"
+              },
+              "worst_case_net_profit": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "sample_count",
+              "median_net_profit",
+              "median_max_drawdown",
+              "worst_case_net_profit",
+              "worst_case_drawdown",
+              "pass_rate"
+            ],
+            "type": "object"
+          },
+          "decision": {
+            "type": "string"
+          },
+          "oos": {
+            "properties": {
+              "equity_curve": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "fee_spend": {
+                "type": "number"
+              },
+              "funding_spend": {
+                "type": "number"
+              },
+              "gross_pnl": {
+                "type": "number"
+              },
+              "liquidation_events": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "max_drawdown": {
+                "type": "number"
+              },
+              "net_pnl": {
+                "type": "number"
+              },
+              "sharpe": {
+                "type": "number"
+              },
+              "sortino": {
+                "type": "number"
+              },
+              "trade_count": {
+                "type": "integer"
+              },
+              "win_rate": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "trade_count",
+              "win_rate",
+              "gross_pnl",
+              "net_pnl",
+              "fee_spend",
+              "funding_spend",
+              "sharpe",
+              "sortino",
+              "max_drawdown",
+              "equity_curve"
+            ],
+            "type": "object"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "train": {
+            "properties": {
+              "equity_curve": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "fee_spend": {
+                "type": "number"
+              },
+              "funding_spend": {
+                "type": "number"
+              },
+              "gross_pnl": {
+                "type": "number"
+              },
+              "liquidation_events": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "max_drawdown": {
+                "type": "number"
+              },
+              "net_pnl": {
+                "type": "number"
+              },
+              "sharpe": {
+                "type": "number"
+              },
+              "sortino": {
+                "type": "number"
+              },
+              "trade_count": {
+                "type": "integer"
+              },
+              "win_rate": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "trade_count",
+              "win_rate",
+              "gross_pnl",
+              "net_pnl",
+              "fee_spend",
+              "funding_spend",
+              "sharpe",
+              "sortino",
+              "max_drawdown",
+              "equity_curve"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "decision",
+          "train",
+          "oos",
+          "bootstrap"
+        ],
+        "type": "object"
+      },
+      "type": "object"
+    },
+    "exit_layers": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "holdout_decision": {
+      "properties": {
+        "decision": {
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "incumbent": {
+      "properties": {
+        "backbone": {
+          "type": "string"
+        },
+        "layers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "backbone"
+      ],
+      "type": "object"
+    },
+    "known_good_filters": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "layer_parameters": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "type": [
+            "number",
+            "integer"
+          ]
+        },
+        "properties": {
+          "aggressiveness": {
+            "type": "number"
+          },
+          "entry_stride": {
+            "type": "integer"
+          },
+          "flat_range_threshold": {
+            "type": "number"
+          },
+          "hold_bars": {
+            "type": "integer"
+          },
+          "mean_threshold_offset": {
+            "type": "number"
+          },
+          "strictness": {
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "type": "object"
+    },
+    "parameter_grids": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "additionalProperties": false,
+          "properties": {
+            "excluded_values": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "maximum": {
+              "type": "number"
+            },
+            "minimum": {
+              "type": "number"
+            },
+            "step": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "minimum",
+            "maximum",
+            "step"
+          ],
+          "type": "object"
+        },
+        "type": "object"
+      },
+      "type": "object"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "runtime": {
+      "additionalProperties": false,
+      "properties": {
+        "bootstrap_block_size": {
+          "type": "integer"
+        },
+        "bootstrap_depth_multiplier": {
+          "type": "number"
+        },
+        "bootstrap_latency_multiplier": {
+          "type": "number"
+        },
+        "bootstrap_samples": {
+          "type": "integer"
+        },
+        "bootstrap_spread_multiplier": {
+          "type": "number"
+        },
+        "fail_on_quality_flags": {
+          "type": "boolean"
+        },
+        "holdout_drawdown_cap": {
+          "type": "number"
+        },
+        "holdout_sharpe_floor": {
+          "type": "number"
+        },
+        "latency_bars": {
+          "type": "integer"
+        },
+        "liquidation_cooldown_bars": {
+          "type": "integer"
+        },
+        "liquidation_fee_bps": {
+          "type": "number"
+        },
+        "liquidation_fee_schedule": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "liquidation_fee_bps": {
+                "type": "number"
+              },
+              "max_leverage": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "max_leverage",
+              "liquidation_fee_bps"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "liquidation_mark_premium_bps": {
+          "type": "number"
+        },
+        "liquidation_mark_price_weight": {
+          "type": "number"
+        },
+        "liquidation_step_schedule": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "maintenance_margin_ratio": {
+          "type": "number"
+        },
+        "maintenance_margin_schedule": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "maintenance_margin_ratio": {
+                "type": "number"
+              },
+              "max_leverage": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "max_leverage",
+              "maintenance_margin_ratio"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "min_oos_trades": {
+          "type": "integer"
+        },
+        "mode": {
+          "enum": [
+            "builtin",
+            "fixture"
+          ],
+          "type": "string"
+        },
+        "partial_liquidation_ratio": {
+          "type": "number"
+        },
+        "position_leverage": {
+          "type": "number"
+        },
+        "position_side": {
+          "enum": [
+            "long",
+            "short"
+          ],
+          "type": "string"
+        },
+        "scenario_severity_multiplier": {
+          "type": "number"
+        },
+        "slippage_bps": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "scenario_results": {
+      "additionalProperties": {
+        "properties": {
+          "equity_curve": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "fee_spend": {
+            "type": "number"
+          },
+          "funding_spend": {
+            "type": "number"
+          },
+          "gross_pnl": {
+            "type": "number"
+          },
+          "liquidation_events": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "max_drawdown": {
+            "type": "number"
+          },
+          "net_pnl": {
+            "type": "number"
+          },
+          "sharpe": {
+            "type": "number"
+          },
+          "sortino": {
+            "type": "number"
+          },
+          "trade_count": {
+            "type": "integer"
+          },
+          "win_rate": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "trade_count",
+          "win_rate",
+          "gross_pnl",
+          "net_pnl",
+          "fee_spend",
+          "funding_spend",
+          "sharpe",
+          "sortino",
+          "max_drawdown",
+          "equity_curve"
+        ],
+        "type": "object"
+      },
+      "type": "object"
+    },
+    "scenarios": {
+      "items": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "drawdown_multiplier": {
+            "type": "number"
+          },
+          "funding_multiplier": {
+            "type": "number"
+          },
+          "index_basis_bps": {
+            "type": "number"
+          },
+          "latency_delta_bars": {
+            "type": "integer"
+          },
+          "liquidity_penalty_bps": {
+            "type": "number"
+          },
+          "mark_premium_bps": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "premium_spike_bars": {
+            "type": "integer"
+          },
+          "severity": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "severity",
+          "description"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "snapshot": {
+      "properties": {
+        "basis_bps": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "candles": {
+          "items": {
+            "properties": {
+              "close": {
+                "type": "number"
+              },
+              "high": {
+                "type": "number"
+              },
+              "low": {
+                "type": "number"
+              },
+              "open": {
+                "type": "number"
+              },
+              "timestamp": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "trade_count": {
+                "type": "integer"
+              },
+              "volume": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "timestamp",
+              "open",
+              "high",
+              "low",
+              "close",
+              "volume"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "contract_type": {
+          "type": "string"
+        },
+        "d_oi": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "d_oi_z": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "depth_ask_1bp_usd": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "depth_bid_1bp_usd": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "funding_rates": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "funding_z": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "index_price": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "latency_proxy_ms": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "liq_intensity_z": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "liq_long_usd": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "liq_short_usd": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "liquidation_notional": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "maker_fee_bps": {
+          "type": "number"
+        },
+        "mark_price": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "next_funding_ts": {
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "open_interest": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "open_interest_usd": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "provenance": {
+          "type": "object"
+        },
+        "quality_flags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "quality_report": {
+          "additionalProperties": true,
+          "properties": {
+            "generated_at": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "issues": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "metrics": {
+              "type": "object"
+            },
+            "passed": {
+              "type": "boolean"
+            },
+            "quality_score": {
+              "type": "number"
+            },
+            "report_id": {
+              "type": "string"
+            },
+            "snapshot_id": {
+              "type": "string"
+            },
+            "source_checks": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "report_id",
+            "snapshot_id"
+          ],
+          "type": "object"
+        },
+        "regime_id": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "regime_probabilities": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "ret_1": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "ret_24": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "rv_24h": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "snapshot_id": {
+          "type": "string"
+        },
+        "spread_bps": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "taker_fee_bps": {
+          "type": "number"
+        },
+        "timeframe": {
+          "type": "string"
+        },
+        "venue": {
+          "type": "string"
+        },
+        "venue_profile": {
+          "additionalProperties": false,
+          "properties": {
+            "contract_type": {
+              "type": "string"
+            },
+            "funding_interval_h": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "leverage_tiers": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "liquidation_cooldown_bars": {
+              "type": "integer"
+            },
+            "liquidation_fee_schedule": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "liquidation_mark_premium_bps": {
+              "type": "number"
+            },
+            "liquidation_mark_price_weight": {
+              "type": "number"
+            },
+            "liquidation_style": {
+              "type": "string"
+            },
+            "maintenance_margin_schedule": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "mark_price_source": {
+              "type": "string"
+            },
+            "notes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "partial_liquidation_ratio": {
+              "type": "number"
+            },
+            "quote_currency": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "settlement_currency": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "venue": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "venue"
+          ],
+          "type": "object"
+        },
+        "vol_regime": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "snapshot_id",
+        "symbol",
+        "venue",
+        "timeframe",
+        "candles",
+        "funding_rates",
+        "open_interest",
+        "liquidation_notional",
+        "maker_fee_bps",
+        "taker_fee_bps"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "run_id",
+    "seed",
+    "snapshot",
+    "incumbent"
+  ],
+  "title": "ProofAlpha Study",
+  "type": "object"
+}

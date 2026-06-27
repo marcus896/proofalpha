@@ -1,0 +1,645 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProofAlpha Dashboard</title>
+  <link rel="icon" href="./assets/brand/proofalpha-mark.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #0e0e0e;
+      --surface-2: #171717;
+      --paper: #f2efe7;
+      --text: #f2efe7;
+      --muted: rgba(242, 239, 231, 0.62);
+      --muted-soft: rgba(242, 239, 231, 0.78);
+      --accent: #d71921;
+      --purple: #d71921;
+      --purple-strong: #f2efe7;
+      --accent-rgb: 215, 25, 33;
+      --accent-strong-rgb: 242, 239, 231;
+      --green: #57b36a;
+      --red: #d71921;
+      --border: rgba(242, 239, 231, 0.16);
+      --panel-shadow: none;
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle, rgba(242, 239, 231, 0.085) 1px, transparent 1px) 0 0 / 18px 18px,
+        #080808;
+      color: var(--text);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+    }
+
+    body { overflow: hidden; }
+
+    #stageViewport {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+      padding-top: 4px;
+    }
+
+    .dashboard-shell {
+      width: 1448px;
+      height: 768px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 10px 0 0;
+      transform-origin: top center;
+      transform: scale(var(--stage-scale, 1));
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 300px 150px 146px 210px 170px 238px;
+      gap: 8px;
+      align-items: stretch;
+      justify-content: start;
+    }
+
+    .brand-card,
+    .toolbar-box,
+    .panel,
+    .metric-card,
+    .mini-chart-wrap,
+    .rank-chip,
+    .overlay-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      box-shadow: none;
+    }
+
+    .brand-card {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+      padding: 8px 10px;
+      border-color: rgba(242, 239, 231, 0.28);
+    }
+
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 4px;
+      object-fit: cover;
+      border: 1px solid rgba(242, 239, 231, 0.18);
+      background: #080808;
+    }
+
+    .brand-copy { min-width: 0; }
+
+    .brand-title {
+      font-family: "Doto", "Space Mono", monospace;
+      font-size: 19px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+      color: var(--paper);
+      white-space: nowrap;
+    }
+
+    .brand-subtitle,
+    .toolbar-label,
+    .panel-title,
+    .metric-card-title,
+    .section-kicker,
+    th {
+      font-family: "Space Mono", monospace;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .brand-subtitle {
+      margin-top: 5px;
+      color: var(--accent);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .toolbar-box {
+      min-width: 0;
+      padding: 8px 9px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      justify-content: flex-start;
+    }
+
+    .toolbar-label {
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .toolbar-select-wrap { position: relative; }
+
+    .toolbar-select-wrap::after {
+      content: "v";
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      color: rgba(8, 8, 8, 0.72);
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    .toolbar-box select,
+    .manual-actions select {
+      width: 100%;
+      min-width: 0;
+      appearance: none;
+      border: 1px solid rgba(242, 239, 231, 0.22);
+      border-radius: 4px;
+      padding: 8px 28px 8px 10px;
+      background: var(--paper);
+      color: #080808;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .source-details {
+      display: flex;
+      flex: 1;
+      min-width: 0;
+      align-items: center;
+    }
+
+    .manual-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .manual-actions select { flex: 1; }
+
+    .manual-actions button {
+      appearance: none;
+      border: 1px solid rgba(242, 239, 231, 0.24);
+      background: var(--surface);
+      color: var(--paper);
+      border-radius: 4px;
+      padding: 8px 10px;
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .manual-actions button:hover {
+      color: #080808;
+      border-color: var(--paper);
+      background: var(--paper);
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 348px minmax(0, 1fr) 240px;
+      grid-template-rows: 92px 306px 230px;
+      gap: 12px;
+      height: calc(100% - 92px);
+      min-height: 0;
+    }
+
+    .panel {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      grid-row: 1 / span 3;
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-color: rgba(242, 239, 231, 0.22);
+    }
+
+    .panel-title,
+    .glow-title,
+    .rank-title {
+      color: var(--paper);
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-transform: none;
+    }
+
+    .param-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      gap: 8px;
+      padding-right: 4px;
+    }
+
+    .param-scroll::-webkit-scrollbar,
+    .table-scroll::-webkit-scrollbar,
+    .rank-list::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .param-scroll::-webkit-scrollbar-thumb,
+    .table-scroll::-webkit-scrollbar-thumb,
+    .rank-list::-webkit-scrollbar-thumb {
+      background: rgba(242, 239, 231, 0.36);
+      border-radius: 999px;
+    }
+
+    .param-pill,
+    .rank-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 9px;
+      border-radius: 4px;
+      background: var(--surface-2);
+      color: var(--paper);
+      border: 1px solid rgba(242, 239, 231, 0.14);
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      line-height: 1.2;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .param-pill span {
+      color: rgba(242, 239, 231, 0.55);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 150px;
+    }
+
+    .sidebar-stats,
+    table {
+      color: rgba(242, 239, 231, 0.78);
+      font-family: "Space Mono", monospace;
+    }
+
+    .sidebar-stats {
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .mini-chart-wrap {
+      height: 120px;
+      background: #080808;
+      border-color: rgba(242, 239, 231, 0.14);
+      overflow: hidden;
+    }
+
+    .mini-chart-wrap canvas,
+    .chart-panel canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .metric-row {
+      grid-column: 2 / 4;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .metric-card {
+      min-width: 0;
+      padding: 11px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 5px;
+      text-align: left;
+      background: var(--paper);
+      color: #080808;
+      border-color: var(--paper);
+      overflow: hidden;
+    }
+
+    .metric-card-title {
+      color: rgba(8, 8, 8, 0.58);
+      font-size: 10px;
+      line-height: 1.15;
+      max-width: 100%;
+    }
+
+    .metric-card-value,
+    .metric-card-subvalue {
+      font-family: "Space Mono", monospace;
+      color: #080808;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 700;
+    }
+
+    .metric-card-value {
+      font-size: 20px;
+      line-height: 1.05;
+    }
+
+    .metric-card-subvalue {
+      font-size: 12px;
+      line-height: 1.08;
+      color: var(--accent);
+    }
+
+    .chart-panel {
+      grid-column: 2 / 4;
+      padding: 14px 16px 12px;
+      min-height: 0;
+    }
+
+    .chart-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .chart-fallback span {
+      padding: 9px 14px;
+      border-radius: 4px;
+      background: var(--surface-2);
+      border: 1px solid rgba(242, 239, 231, 0.18);
+      color: var(--muted);
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+    }
+
+    .table-panel {
+      grid-column: 2 / 3;
+      padding: 14px 16px 12px;
+      border-color: rgba(242, 239, 231, 0.22);
+    }
+
+    .table-headline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .glow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .green-bar {
+      height: 1px;
+      background: rgba(242, 239, 231, 0.2);
+      margin-bottom: 12px;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .table-scroll {
+      max-height: 155px;
+      overflow: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(242, 239, 231, 0.1);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+      white-space: normal;
+    }
+
+    th { font-size: 11px; }
+
+    .rank-panel {
+      grid-column: 3 / 4;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .rank-title { margin-bottom: 14px; }
+
+    .rank-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .rank-chip { align-self: flex-start; }
+
+    .rank-chip.active {
+      color: #080808;
+      background: var(--paper);
+      border-color: var(--paper);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      background:
+        radial-gradient(circle, rgba(242, 239, 231, 0.09) 1px, transparent 1px) 0 0 / 18px 18px,
+        #080808;
+      transition: opacity 0.16s ease-out;
+    }
+
+    .overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .overlay-card {
+      width: min(500px, calc(100vw - 30px));
+      padding: 28px 24px;
+      text-align: left;
+      border-color: rgba(242, 239, 231, 0.22);
+    }
+
+    .overlay-card h2 {
+      margin: 0 0 8px;
+      font-family: "Doto", "Space Mono", monospace;
+      font-size: 26px;
+      color: var(--paper);
+      letter-spacing: 0;
+    }
+
+    .overlay-card p {
+      margin: 0;
+      color: rgba(242, 239, 231, 0.64);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    #manualFileInput { display: none; }
+  </style>
+</head>
+<body>
+  <input id="manualFileInput" type="file" accept=".json" />
+
+  <div id="overlay" class="overlay">
+    <div class="overlay-card">
+      <h2>LOADING DASHBOARD</h2>
+      <p>Opening test backtest mode. Switch Data Mode to view real strategy artifacts or paper trading telemetry when available.</p>
+    </div>
+  </div>
+
+  <div id="stageViewport">
+  <div class="dashboard-shell">
+    <div class="topbar">
+      <div class="brand-card">
+        <img class="brand-icon" src="./assets/brand/proofalpha-mark.svg" alt="" />
+        <div class="brand-copy">
+          <div class="brand-title">PROOFALPHA</div>
+          <div class="brand-subtitle">EVIDENCE LAB / PAPER READINESS</div>
+        </div>
+      </div>
+
+      <div class="toolbar-box">
+        <div class="toolbar-label">Data Mode</div>
+        <div class="toolbar-select-wrap">
+          <select id="dataModeSelect"></select>
+        </div>
+      </div>
+
+      <div class="toolbar-box">
+        <div class="toolbar-label">Analysis Mode</div>
+        <div class="toolbar-select-wrap">
+          <select id="analysisModeSelect"></select>
+        </div>
+      </div>
+
+      <div class="toolbar-box">
+        <div class="toolbar-label">Sort Metric(s)</div>
+        <div class="toolbar-select-wrap">
+          <select id="sortMetricSelect"></select>
+        </div>
+      </div>
+
+      <div class="toolbar-box">
+        <div class="toolbar-label">Simulation Result</div>
+        <div class="toolbar-select-wrap">
+          <select id="simulationResultSelect"></select>
+        </div>
+      </div>
+
+      <div class="toolbar-box">
+        <div class="toolbar-label">Load Source</div>
+        <div class="source-details">
+          <div id="manualActions" class="manual-actions">
+            <div class="toolbar-select-wrap" style="flex:1;">
+              <select id="manualRunSelect"></select>
+            </div>
+            <button id="uploadButton" type="button">Browse</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <aside class="panel sidebar">
+        <div class="panel-title">Parameters</div>
+        <div id="paramContainer" class="param-scroll"></div>
+        <div id="sidebarStats" class="sidebar-stats">MaxDD: -- Sharpe: -- Sortino: -- WinRate: --</div>
+        <div class="mini-chart-wrap">
+          <canvas id="ddChartCanvas"></canvas>
+        </div>
+      </aside>
+
+      <section class="metric-row">
+        <div class="metric-card"><div class="metric-card-title">Net Profit</div><div id="mtProfit" class="metric-card-value">--</div></div>
+        <div class="metric-card"><div class="metric-card-title">Max Equity DD</div><div id="mtDD1" class="metric-card-value">--</div><div id="mtDD2" class="metric-card-subvalue">--</div></div>
+        <div class="metric-card"><div class="metric-card-title">Total Trades</div><div id="mtTrades" class="metric-card-value">--</div></div>
+        <div class="metric-card"><div class="metric-card-title">Win Rate</div><div id="mtWin" class="metric-card-value">--</div></div>
+        <div class="metric-card"><div class="metric-card-title">Sharpe Ratio</div><div id="mtSharpe" class="metric-card-value">--</div></div>
+        <div class="metric-card"><div class="metric-card-title">Sortino Ratio</div><div id="mtSortino" class="metric-card-value">--</div></div>
+        <div class="metric-card"><div class="metric-card-title">Bootstrap Pass %<br>(Resilience)</div><div id="mtBoot" class="metric-card-value">--</div></div>
+      </section>
+
+      <section class="panel chart-panel">
+        <canvas id="mainEquityChart"></canvas>
+        <div id="equityFallback" class="chart-fallback"><span>No timeseries found for this strategy.</span></div>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="table-headline"><div class="glow-dot"></div><div class="glow-title">Normal Training</div></div>
+        <div class="green-bar"></div>
+        <div id="tableKicker" class="section-kicker">Normal Training</div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Metric</th><th>All</th><th>Long</th><th>Short</th></tr></thead>
+            <tbody id="trainingTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel rank-panel">
+        <div id="rankTitle" class="rank-title">Ranked Results: 0 Parameter Sets</div>
+        <div id="rankList" class="rank-list"></div>
+      </section>
+    </div>
+  </div>
+  </div>
+
+    <script src="./dashboard.js?v=20260426-nothing-redesign"></script>
+</body>
+</html>
+

@@ -1,0 +1,56 @@
+{
+  "artifact_type": "public_ws_capture_config",
+  "version": 2,
+  "workspace": ".",
+  "python": "py",
+  "python_args": ["-3.12"],
+  "task_name": "TradingStrategyPublicWSCapture",
+  "task_interval_minutes": 15,
+  "db": "outputs/public-ws/public_stream.sqlite",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT"
+  ],
+  "streams": [
+    "markPrice@1s",
+    "forceOrder",
+    "bookTicker"
+  ],
+  "first_capture_seconds": 43200,
+  "minimum_first_window_seconds": 28800,
+  "strong_capture_seconds": 259200,
+  "no_message_timeout_seconds": 60,
+  "heartbeat_interval_seconds": 60,
+  "post_start_healthcheck_seconds": 12,
+  "session_prefix_first": "strict-v3-forward-public-ws-auto",
+  "session_prefix_strong": "strict-v3-forward-public-ws-72h",
+  "strong_session_detection_prefix": "strict-v3-forward-public-ws-72h",
+  "paths": {
+    "inventory": "outputs/data/strict-v3-data-inventory.json",
+    "manifest": "outputs/public-ws/capture_manifest.json",
+    "coverage": "outputs/public-ws/capture_coverage.json",
+    "logs_dir": "outputs/public-ws/logs",
+    "sidecar": "outputs/public-ws/liquidation_notional.csv",
+    "readme": "outputs/public-ws/README.md"
+  },
+  "agent_data_contract": {
+    "control_files_are_json_or_md": true,
+    "raw_stream_storage": "sqlite",
+    "raw_sidecar_storage": "csv",
+    "reason_raw_not_json": "Public stream events are high-volume telemetry. Keep raw rows in SQLite/CSV for scale; expose agent-readable state through JSON and Markdown manifests.",
+    "single_live_progress_tracker": "PLAN_STATUS.json",
+    "status_inventory": "outputs/data/strict-v3-data-inventory.json",
+    "capture_manifest": "outputs/public-ws/capture_manifest.json",
+    "coverage_report": "outputs/public-ws/capture_coverage.json",
+    "human_readme": "outputs/public-ws/README.md"
+  },
+  "gap_policy": {
+    "can_collect_when_laptop_closed_or_asleep": false,
+    "laptop_closed_or_asleep_result": "live_websocket_gap",
+    "missed_force_order_or_book_ticker_backfill": "unavailable",
+    "missed_mark_price_backfill": "limited_derived_or_rest_klines_only_not_tick_equivalent",
+    "ohlcv_backfill": "archive_or_rest_backfill_allowed_when_inventory_records_source",
+    "never_zero_fill_missing_liquidations": true,
+    "use_only_observed_windows_for_liquidation_sidecar": true
+  }
+}

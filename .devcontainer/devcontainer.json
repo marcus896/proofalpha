@@ -1,0 +1,21 @@
+{
+  "name": "ProofAlpha",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "proofalpha",
+  "containerEnv": {
+    "PROOFALPHA_MODE": "paper",
+    "PROOFALPHA_TELEMETRY": "off"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff"
+      ]
+    }
+  },
+  "postCreateCommand": "python -m unittest discover -s tests -q && proofalpha doctor --format json"
+}

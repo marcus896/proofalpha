@@ -1,0 +1,5 @@
+duckdb>=1.1,<2
+numpy>=1.26,<3
+numba>=0.60
+optuna>=4.0
+websockets>=13.1,<17

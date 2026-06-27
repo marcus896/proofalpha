@@ -1,0 +1,23 @@
+{
+  "campaign_id": "minimal-campaign",
+  "vars": {
+    "root": "outputs"
+  },
+  "defaults": {
+    "db": "{root}/campaign-memory.sqlite"
+  },
+  "entries": [
+    {
+      "command": "run",
+      "config": "examples/minimal_builtin_study.json",
+      "name": "baseline",
+      "output_dir": "{root}/campaign_baseline"
+    },
+    {
+      "command": "autoresearch",
+      "config": "examples/minimal_builtin_study.json",
+      "name": "memory-pass",
+      "output_dir": "{root}/campaign_autoresearch"
+    }
+  ]
+}

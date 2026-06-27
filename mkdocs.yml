@@ -1,0 +1,17 @@
+site_name: ProofAlpha
+site_description: Evidence-first autonomous crypto strategy research framework
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Quickstart: QUICKSTART.md
+  - Architecture: ARCHITECTURE.md
+  - Security Model: SECURITY_MODEL.md
+  - Privacy: PRIVACY.md
+  - Open-Source Boundary: OPEN_SOURCE_BOUNDARY.md
+  - Release Checklist: RELEASE_CHECKLIST.md
+  - Brand: BRAND.md
+markdown_extensions:
+  - admonition
+  - tables
+strict: true

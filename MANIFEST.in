@@ -1,0 +1,19 @@
+include README.md
+include LICENSE
+include DISCLAIMER.md
+include SECURITY.md
+include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+include GOVERNANCE.md
+include ROADMAP.md
+include THIRD_PARTY_NOTICES.md
+include TRADEMARKS.md
+include PUBLIC_EXPORT_MANIFEST.json
+include pyproject.toml
+include dashboard.html
+include dashboard.js
+include ui_server.py
+include start_proofalpha_ui_hidden.pyw
+recursive-include assets/brand *.svg
+recursive-include docs *.md
+recursive-include examples *.json *.md
