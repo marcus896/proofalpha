@@ -1,0 +1,32 @@
+services:
+  proofalpha:
+    build:
+      context: .
+    command: ["doctor", "--format", "json"]
+    environment:
+      PROOFALPHA_MODE: paper
+      PROOFALPHA_TELEMETRY: "off"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+  demo:
+    build:
+      context: .
+    command:
+      - run
+      - --config
+      - examples/minimal_builtin_study.json
+      - --output-dir
+      - /tmp/proofalpha-demo
+    environment:
+      PROOFALPHA_MODE: paper
+      PROOFALPHA_TELEMETRY: "off"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    profiles: ["demo"]

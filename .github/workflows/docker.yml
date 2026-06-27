@@ -1,0 +1,34 @@
+name: docker
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  container-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build ProofAlpha image
+        run: docker build --tag proofalpha:ci .
+      - name: Run release doctor as non-root
+        run: |
+          docker run --rm \
+            --read-only \
+            --tmpfs /tmp \
+            --security-opt no-new-privileges \
+            proofalpha:ci doctor --format json
+      - name: Run safe no-key example
+        run: |
+          docker run --rm \
+            --read-only \
+            --tmpfs /tmp \
+            --security-opt no-new-privileges \
+            proofalpha:ci run \
+              --config examples/minimal_builtin_study.json \
+              --output-dir /tmp/proofalpha-demo

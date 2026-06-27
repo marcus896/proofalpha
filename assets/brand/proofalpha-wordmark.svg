@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">ProofAlpha wordmark</title>
+  <desc id="desc">ProofAlpha geometric mark and wordmark in warm white and signal green on a charcoal field.</desc>
+  <rect width="1200" height="320" rx="32" fill="#111315"/>
+  <g transform="translate(54 38) scale(.48)">
+    <path d="M133 356 232 126h58l96 230h-66l-21-57H215l-22 57h-60Zm104-113h43l-21-63-22 63Z" fill="#F4F1E8"/>
+    <path d="m105 276 57 57 129-154" fill="none" stroke="#B7FF4A" stroke-width="38" stroke-linecap="square" stroke-linejoin="miter"/>
+    <path d="M307 302h91" stroke="#B7FF4A" stroke-width="38" stroke-linecap="square"/>
+  </g>
+  <text x="304" y="190" fill="#F4F1E8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="108" font-weight="760" letter-spacing="-5">proof</text>
+  <text x="587" y="190" fill="#B7FF4A" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="108" font-weight="760" letter-spacing="-5">alpha</text>
+  <text x="310" y="239" fill="#A9ADA8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="26" font-weight="560" letter-spacing="4">EVIDENCE BEFORE EXECUTION</text>
+</svg>

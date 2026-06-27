@@ -1,0 +1,110 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proofalpha"
+version = "0.1.0"
+description = "Evidence-first autonomous crypto strategy research, validation, paper trading, and risk-gated execution"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = { file = "LICENSE" }
+authors = [
+  { name = "ProofAlpha Contributors" }
+]
+keywords = [
+  "algorithmic-trading",
+  "backtesting",
+  "crypto",
+  "paper-trading",
+  "quantitative-research",
+  "risk-management",
+  "stress-testing"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Office/Business :: Financial :: Investment"
+]
+dependencies = [
+  "duckdb>=1.1,<2",
+  "numpy>=1.26,<3",
+  "numba>=0.60",
+  "optuna>=4.0",
+  "websockets>=13.1,<17"
+]
+
+[project.optional-dependencies]
+bootstrap = [
+  "tsbootstrap>=0.2.0"
+]
+data = [
+  "alpaca-py>=0.30",
+  "ccxt>=4.0"
+]
+statistics = [
+  "arch>=7.0"
+]
+regimes = [
+  "hmmlearn>=0.3"
+]
+docs = [
+  "mkdocs-material>=9.5,<10"
+]
+dev = [
+  "build>=1.2",
+  "coverage>=7.6",
+  "pip-audit>=2.7",
+  "pyright>=1.1",
+  "ruff>=0.8"
+]
+all = [
+  "alpaca-py>=0.30",
+  "arch>=7.0",
+  "ccxt>=4.0",
+  "hmmlearn>=0.3",
+  "tsbootstrap>=0.2.0"
+]
+
+[project.scripts]
+proofalpha = "proofalpha.runtime:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["engine*", "proofalpha*"]
+
+[tool.setuptools.package-data]
+proofalpha = ["_skills/*/SKILL.md"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF"]
+ignore = ["E501"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.12"
+typeCheckingMode = "basic"
+
+[tool.coverage.run]
+branch = true
+source = ["engine", "proofalpha"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">ProofAlpha GitHub social preview</title>
+  <desc id="desc">ProofAlpha wordmark with the statement Evidence before execution.</desc>
+  <rect width="1280" height="640" fill="#111315"/>
+  <path d="M0 540h1280v100H0z" fill="#B7FF4A"/>
+  <g transform="translate(94 128) scale(.72)">
+    <path d="M133 356 232 126h58l96 230h-66l-21-57H215l-22 57h-60Zm104-113h43l-21-63-22 63Z" fill="#F4F1E8"/>
+    <path d="m105 276 57 57 129-154" fill="none" stroke="#B7FF4A" stroke-width="38" stroke-linecap="square" stroke-linejoin="miter"/>
+    <path d="M307 302h91" stroke="#B7FF4A" stroke-width="38" stroke-linecap="square"/>
+  </g>
+  <text x="424" y="294" fill="#F4F1E8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="112" font-weight="760" letter-spacing="-6">proof</text>
+  <text x="718" y="294" fill="#B7FF4A" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="112" font-weight="760" letter-spacing="-6">alpha</text>
+  <text x="432" y="365" fill="#A9ADA8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="31" font-weight="560" letter-spacing="4">AUTONOMOUS CRYPTO STRATEGY ENGINE</text>
+  <text x="80" y="606" fill="#111315" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="34" font-weight="800" letter-spacing="2">EVIDENCE BEFORE EXECUTION.</text>
+</svg>

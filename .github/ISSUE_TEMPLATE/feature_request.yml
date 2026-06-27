@@ -1,0 +1,43 @@
+name: Feature proposal
+description: Propose a reproducibility, safety, research, or developer-experience improvement
+title: "[Proposal]: "
+labels: [proposal, triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the user or maintainer problem without assuming a solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Acceptance criteria and evidence
+    validations:
+      required: true
+  - type: dropdown
+    id: safety
+    attributes:
+      label: Safety impact
+      options:
+        - No execution or credential impact
+        - Changes research/evidence behavior
+        - Changes paper-trading behavior
+        - Changes risk policy
+        - Requests live-execution behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: This proposal does not promise profits or present backtests as future-return evidence.
+          required: true

@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.pyright/
+.ruff_cache/
+.hypothesis/
+
+# Environments
+.venv/
+.release-venv/
+.private-core-staging/
+venv/
+env/
+
+# Build
+/build/
+/dist/
+/site/
+.eggs/
+pip-wheel-metadata/
+*.egg-info/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+
+# Data and generated artifacts
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.parquet
+/outputs/
+/artifacts/
+/bundles/
+/logs/
+*.log
+/test-output-*/
+/test-phase*/
+/test-memory-*/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local package locks until dependency policy is selected
+*.local.lock
+
+# Legacy local shortcuts excluded from the public package
+start_wolfpack_ui_hidden.pyw
